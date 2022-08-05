@@ -1,0 +1,87 @@
+
+<table class="table table-hover">
+  <th>Name</th>
+  <th>Address</th>
+  <th>Telephone Number</th>
+  <th>Designation</th>
+  <th>Department   </th>
+  <th>Joined Date</th>
+  <tr *ngFor="let pd of service.list">
+    <td (click)="populateForm(pd)">{{pd.empName}}</td>
+    <td (click)="populateForm(pd)">{{pd.address}}</td>
+    <td (click)="populateForm(pd)">{{pd.telephoneNumber}}</td>
+    <td (click)="populateForm(pd)">{{pd.designation}}</td>
+    <td (click)="populateForm(pd)">{{pd.department}}   </td>
+    <td (click)="populateForm(pd)">{{pd.joinDate}}</td>
+    <td (click)="editEmploye(pd)"data-bs-toggle="modal" data-bs-target="#editEmp"><i style="color: blue ;" class="fa-solid fa-pen-to-square"></i></td>
+    <td (click)="clickMethod(pd.empName, pd.empId)"><i style="color: red ;" class="fa-solid fa-trash-can"></i></td>
+  </tr>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editEmp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Employe Information Update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <input name="empId" type="hidden" [value]="service.formData.empId">
+          <div *ngIf="message" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Updated successfuly!</strong> Employee Information
+            <button (click)="removeMessage()" type="button" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input name="EmpName" #EmpName="ngModel" [(ngModel)]="service.formData.empName" class="form-control" placeholder="Employee Name" required >
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input name="Address" #Address="ngModel" [(ngModel)]="service.formData.address" class="form-control" placeholder="Address" required >
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input name="TelephoneNumber" #TelephoneNumber="ngModel" [(ngModel)]="service.formData.telephoneNumber" class="form-control" placeholder="Telephone Number"
+           required maxlength="10" minlength="10">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input name="Designation" #Designation="ngModel" [(ngModel)]="service.formData.designation" class="form-control" placeholder="Designation" required >
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input name="Department" #Department="ngModel" [(ngModel)]="service.formData.department" class="form-control" placeholder="Department" required >
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input name="JoinDate" #JoinDate="ngModel" [(ngModel)]="service.formData.joinDate" class="form-control" placeholder="Joining Date" required >
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="form.invalid">Update</button>
+        </div>
+        </form>
+      </div> 
+
+    </div>
+  </div>
+</div>
